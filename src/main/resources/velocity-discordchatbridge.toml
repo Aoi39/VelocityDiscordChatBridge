@@ -1,0 +1,101 @@
+[DiscordBot]
+    # Boolean
+    # Whether to use DiscordBot or not.
+    # If you disable it, you can still use it as a chat bridge between servers connected by Velocity.
+    enableDiscordBot=true
+
+    # String
+    # The discordBot token.
+    # If you don't know how to get Token, please see or look up the channel that describes how to get my Discord server.
+    token=""
+
+    # String
+    # ID of the server that uses DiscordBot.
+    # If you don't know how to get ID, please see or look up the channel that describes how to get my Discord server.
+    guildId=""
+
+    # String
+    # ID of the channel that uses ChatBridge
+    # Chat Bridge allows users to synchronize chats in Discord and in servers connected by Velocity.
+    # If you don't know how to get ID, please see or look up the channel that describes how to get my Discord server.
+    chatBridgeChannelId=""
+
+    # String (Optional)
+    # ID of the channel that uses PlayerList.
+    # PlayerList can display the list of players participating in the server as a continuously updated message on the channel.
+    # Bot automatically reads messages on the specified channel and determines whether to update or send a new one, so use an empty channel during setup.
+    # If you don't know how to get ID, please see or look up the channel that describes how to get my Discord server.
+    playerListChannelId=""
+
+    # Boolean
+    # Whether to make the whitelist registration of VelocityWhitelistPlugin
+    # which I have published elsewhere, available from DiscordBot commands.
+    enableWhitelistCommand=false
+
+    # String (Optional)
+    # ID of the role that can register velocity whitelist
+    # If you want all users to be able to add to the whitelist, leave this field empty.
+    whitelistableRoleId=""
+
+[ChatBridge]
+    # Boolean
+    # Whether messages sent by the bot are displayed on ChatBridge.
+    # Bot in this setting refers to any bot other than the bot for ChatBridge.
+    showBotMessages=false
+
+    # Boolean
+    # Show the sender's server name in the Prefix of the shared chat.
+    enableServerNamePrefix=true
+
+    # String
+    # Hex for the color displayed in ServerNamePrefix.
+    serverNamePrefixColor="#00ff00"
+
+    # Boolean
+    # Notify the channel for ChatBridge when the Player Join and leaves.
+    # Also, DiscordBot must be enabled to use this setting.
+    notifyJoinAndLeave=true
+
+    # String
+    # Hex for the color displayed in notify join embed message.
+    notifyJoinMessageColor="#00ff00"
+
+    # String
+    # Hex for the color displayed in notify leave embed message.
+    notifyLeaveMessageColor="#a9a9a9"
+
+    # String
+    # Icon image to be used in player join and leave notifications.
+    # Can be formatted and used with {username} and {uuid}.
+    notifyJoinAndLeaveIcon="https://mc-heads.net/avatar/{uuid}"
+
+    # Boolean
+    # Notify the channel for ChatBridge when the Velocity server starts and stops.
+    # Also, DiscordBot must be enabled to use this setting.
+    notifyServerStartupAndShutdown=true
+
+[PlayerList]
+    # Int
+    # Update interval of embed messages in player list (minutes).
+    # Extremely low values can cause DiscordBot to reach the rate limit.
+    playerListUpdateInterval=5
+
+    # String
+    # Hex for the color displayed in PlayerList embed message.
+    playerListMessageColor="#00ff00"
+
+    # List<String>
+    # The order of servers in the player list displayed on discord.
+    # If something is not registered here, it will be added at the end of the list.
+    playerListOrder=["server1", "server2", "server3"]
+
+[System]
+    # String
+    # Language used in plugin.
+    # Available: ["en_us", "ja_jp"]
+    language="en_us"
+
+    # String
+    # Config version.
+    # if you do not know what this is, you should not change it.
+    configVersion="1.0.0"

@@ -1,0 +1,14 @@
+{
+  "anErrorHasOccurred": "エラーが発生しました。",
+  "serverHasStarted": "サーバーが起動しました。",
+  "serverHasStopped": "サーバーが停止しました。",
+  "playerJoinedTheGame": "{username}が参加しました。",
+  "playerLeftTheGame": "{username}が退出しました。",
+  "addedPlayerToTheWhitelist": "<{username}>をホワイトリストに追加しました。",
+  "removedPlayerFromTheWhitelist": "<{username}>をホワイトリストから削除しました。",
+  "playerNotFound": "プレイヤーが見つかりませんでした。",
+  "playerHaveAlreadyBeenAdded": "プレイヤーは既に追加されています。",
+  "playerList": "プレイヤーリスト",
+  "attachment": "添付ファイル",
+  "notPermitted": "許可されていません。"
+}

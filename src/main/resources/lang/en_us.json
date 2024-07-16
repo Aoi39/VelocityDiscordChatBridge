@@ -1,0 +1,14 @@
+{
+  "anErrorHasOccurred": "An error has occurred.",
+  "serverHasStarted": "Server has started.",
+  "serverHasStopped": "Server has stopped.",
+  "playerJoinedTheGame": "{username} joined the game.",
+  "playerLeftTheGame": "{username} left the game.",
+  "addedPlayerToTheWhitelist": "Added <{username}> to the whitelist.",
+  "removedPlayerFromTheWhitelist": "Removed <{username}> from the whitelist.",
+  "playerNotFound": "Player not found.",
+  "playerHaveAlreadyBeenAdded": "Player have already been added.",
+  "playerList": "PlayerList",
+  "attachment": "Attachment",
+  "notPermitted": "Not permitted."
+}
