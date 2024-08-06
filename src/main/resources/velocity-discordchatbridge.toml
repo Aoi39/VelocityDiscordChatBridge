@@ -14,7 +14,7 @@
     # If you don't know how to get ID, please see or look up the channel that describes how to get my Discord server.
     guildId=""
 
-    # String
+    # String (Optional)
     # ID of the channel that uses ChatBridge
     # Chat Bridge allows users to synchronize chats in Discord and in servers connected by Velocity.
     # If you don't know how to get ID, please see or look up the channel that describes how to get my Discord server.
@@ -98,4 +98,4 @@
     # String
     # Config version.
     # if you do not know what this is, you should not change it.
-    configVersion="1.0.0"
+    configVersion="1.0.1"

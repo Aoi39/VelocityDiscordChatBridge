@@ -27,7 +27,7 @@ public class PlayerChatListener {
                 server.sendMessage(message);
             }
         }
-        if (Config.discordBotEnableDiscordBot && plugin.getJdaManager().getJda() != null) {
+        if (Config.discordBotEnableDiscordBot && !Config.discordBotChatBridgeChannelId.isEmpty() &&plugin.getJdaManager().getJda() != null) {
             String discordMessage = "<" + event.getPlayer().getUsername() + "> " + event.getMessage();
             if (Config.chatBridgeEnableServerNamePrefix) {
                 discordMessage = "[" + event.getPlayer().getCurrentServer().get().getServerInfo().getName() + "]" + discordMessage;
@@ -36,6 +36,5 @@ public class PlayerChatListener {
         }
 
     }
-
 
 }

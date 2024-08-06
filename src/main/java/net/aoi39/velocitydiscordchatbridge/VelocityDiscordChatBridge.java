@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 @Plugin(
         id = "velocitydiscordchatbridge",
         name = "VelocityDiscordChatBridge",
-        version = "1.0.0",
+        version = "1.0.1",
         description = "Sync Discord chat with all servers connected by Velocity",
         url = "https://github.com/Aoi39/VelocityDiscordChatBridge",
         authors = { "Aoi39" }

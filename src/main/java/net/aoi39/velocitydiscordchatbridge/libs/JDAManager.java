@@ -89,7 +89,7 @@ public class JDAManager extends ListenerAdapter {
                                     ).queue();
                         }
                     }
-                    if (Config.chatBridgeNotifyServerStartupAndShutdown) {
+                    if (!Config.discordBotChatBridgeChannelId.isEmpty() && Config.chatBridgeNotifyServerStartupAndShutdown) {
                         MessageEmbed embed = new EmbedBuilder()
                                 .setAuthor(LangManager.getMessage("serverHasStarted"))
                                 .setColor(0x00ff00)
@@ -105,7 +105,7 @@ public class JDAManager extends ListenerAdapter {
 
     public void shutdownDiscordBot() {
         if (jda != null) {
-            if (Config.chatBridgeNotifyServerStartupAndShutdown) {
+            if (!Config.discordBotChatBridgeChannelId.isEmpty() && Config.chatBridgeNotifyServerStartupAndShutdown) {
                 MessageEmbed embed = new EmbedBuilder()
                         .setAuthor(LangManager.getMessage("serverHasStopped"))
                         .setColor(0xff0000)
@@ -149,7 +149,7 @@ public class JDAManager extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        if (jda != null && !event.getAuthor().equals(jda.getSelfUser()) && event.getChannel().getId().equals(Config.discordBotChatBridgeChannelId)) {
+        if (jda != null && !event.getAuthor().equals(jda.getSelfUser()) && !Config.discordBotChatBridgeChannelId.isEmpty() && event.getChannel().getId().equals(Config.discordBotChatBridgeChannelId)) {
             if (Config.chatBridgeShowBotMessages && event.getAuthor().isBot()) {
                 return;
             }
