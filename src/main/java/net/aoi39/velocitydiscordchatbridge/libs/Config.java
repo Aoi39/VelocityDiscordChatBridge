@@ -17,6 +17,8 @@ public class Config {
     public static String discordBotToken;
     public static String discordBotGuildId;
     public static String discordBotChatBridgeChannelId;
+    public static String discordBotNotifyJoinAndLeaveChannelId;
+    public static String discordBotNotifyServerStartupAndShutdownChannelId;
     public static String discordBotPlayerListChannelId;
     public static boolean discordBotEnableWhitelistCommand;
     public static String discordBotWhitelistableRoleId;
@@ -24,11 +26,12 @@ public class Config {
     public static boolean chatBridgeShowBotMessages;
     public static boolean chatBridgeEnableServerNamePrefix;
     public static String chatBridgeServerNamePrefixColor;
-    public static boolean chatBridgeNotifyJoinAndLeave;
-    public static String chatBridgeNotifyJoinMessageColor;
-    public static String chatBridgeNotifyLeaveMessageColor;
-    public static String chatBridgeNotifyJoinAndLeaveIcon;
-    public static boolean chatBridgeNotifyServerStartupAndShutdown;
+
+    public static boolean notificationsNotifyJoinAndLeave;
+    public static String notificationsNotifyJoinMessageColor;
+    public static String notificationsNotifyLeaveMessageColor;
+    public static String notificationsNotifyJoinAndLeaveIcon;
+    public static boolean notificationsNotifyServerStartupAndShutdown;
 
     public static int playerListPlayerListUpdateInterval;
     public static String playerListPlayerListMessageColor;
@@ -48,45 +51,53 @@ public class Config {
             try {
                 Files.createDirectories(dataDirectory);
                 Files.copy(VelocityDiscordChatBridge.class.getResourceAsStream("/velocity-discordchatbridge.toml"), dataDirectory.resolve("velocity-discordchatbridge.toml"));
-                VelocityDiscordChatBridge.getLogger().info("Success generate config");
+                VelocityDiscordChatBridge.getLogger().info("Successfully generated to config file");
             } catch (Exception e) {
                 VelocityDiscordChatBridge.getLogger().error("Failed to generate config file\n{}", e.getMessage());
                 System.exit(1);
             }
         }
         Toml config = new Toml().read(configFile);
-        updateConfig(config.getString("System.configVersion"));
+        if (updateConfigVersion(config.getString("System.configVersion"))) {
+            return;
+        }
+        VelocityDiscordChatBridge.getLogger().info("Loading config...");
         discordBotEnableDiscordBot = config.getBoolean("DiscordBot.enableDiscordBot");
         discordBotToken = config.getString("DiscordBot.token");
         discordBotGuildId = config.getString("DiscordBot.guildId");
         discordBotChatBridgeChannelId = config.getString("DiscordBot.chatBridgeChannelId");
+        discordBotNotifyJoinAndLeaveChannelId = config.getString("DiscordBot.notifyJoinAndLeaveChannelId");
+        discordBotNotifyServerStartupAndShutdownChannelId = config.getString("DiscordBot.notifyServerStartupAndShutdownChannelId");
         discordBotPlayerListChannelId = config.getString("DiscordBot.playerListChannelId");
         discordBotEnableWhitelistCommand = config.getBoolean("DiscordBot.enableWhitelistCommand");
         discordBotWhitelistableRoleId = config.getString("DiscordBot.whitelistableRoleId");
         chatBridgeShowBotMessages = config.getBoolean("ChatBridge.showBotMessages");
         chatBridgeEnableServerNamePrefix = config.getBoolean("ChatBridge.enableServerNamePrefix");
         chatBridgeServerNamePrefixColor = config.getString("ChatBridge.serverNamePrefixColor");
-        chatBridgeNotifyJoinAndLeave = config.getBoolean("ChatBridge.notifyJoinAndLeave");
-        chatBridgeNotifyJoinMessageColor = config.getString("ChatBridge.notifyJoinMessageColor");
-        chatBridgeNotifyLeaveMessageColor = config.getString("ChatBridge.notifyLeaveMessageColor");
-        chatBridgeNotifyJoinAndLeaveIcon = config.getString("ChatBridge.notifyJoinAndLeaveIcon");
-        chatBridgeNotifyServerStartupAndShutdown = config.getBoolean("ChatBridge.notifyServerStartupAndShutdown");
+        notificationsNotifyJoinAndLeave = config.getBoolean("Notifications.notifyJoinAndLeave");
+        notificationsNotifyJoinMessageColor = config.getString("Notifications.notifyJoinMessageColor");
+        notificationsNotifyLeaveMessageColor = config.getString("Notifications.notifyLeaveMessageColor");
+        notificationsNotifyJoinAndLeaveIcon = config.getString("Notifications.notifyJoinAndLeaveIcon");
+        notificationsNotifyServerStartupAndShutdown = config.getBoolean("Notifications.notifyServerStartupAndShutdown");
         playerListPlayerListUpdateInterval = config.getLong("PlayerList.playerListUpdateInterval").intValue();
         playerListPlayerListMessageColor = config.getString("PlayerList.playerListMessageColor");
         playerListPlayerListOrder = config.getList("PlayerList.playerListOrder");
         systemLanguage = config.getString("System.language");
-        VelocityDiscordChatBridge.getLogger().info("Success config load!");
+        VelocityDiscordChatBridge.getLogger().info("Successfully loaded to config!");
     }
 
-    private void updateConfig(String configVersion) {
+    private boolean updateConfigVersion(String configVersion) {
         if (!configVersion.equals(plugin.getClass().getAnnotation(Plugin.class).version())) {
             try {
                 Files.move(dataDirectory.resolve("velocity-discordchatbridge.toml"), dataDirectory.resolve("velocity-discordchatbridge-" + configVersion + ".toml"));
                 VelocityDiscordChatBridge.getLogger().info("Regenerated due to different versions of config and plugin(The original config has been renamed to velocity-discordchatbridge-{}.toml)", plugin.getClass().getAnnotation(Plugin.class).version());
+                loadConfig();
+                return true;
             } catch (Exception e) {
                 VelocityDiscordChatBridge.getLogger().error("Failed to update config file\n{}", e.getMessage());
             }
         }
+        return false;
     }
 
 }

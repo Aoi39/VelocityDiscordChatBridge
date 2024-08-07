@@ -15,10 +15,20 @@
     guildId=""
 
     # String (Optional)
-    # ID of the channel that uses ChatBridge
+    # ID of the channel that uses ChatBridge.
     # Chat Bridge allows users to synchronize chats in Discord and in servers connected by Velocity.
     # If you don't know how to get ID, please see or look up the channel that describes how to get my Discord server.
     chatBridgeChannelId=""
+
+    # String (Optional)
+    # ID of channel to send messages when players join and leave.
+    # If you don't know how to get ID, please see or look up the channel that describes how to get my Discord server.
+    notifyJoinAndLeaveChannelId=""
+
+    # String (Optional)
+    # ID of channel to send messages when server startup and shutdown.
+    # If you don't know how to get ID, please see or look up the channel that describes how to get my Discord server.
+    notifyServerStartupAndShutdownChannelId=""
 
     # String (Optional)
     # ID of the channel that uses PlayerList.
@@ -51,8 +61,9 @@
     # Hex for the color displayed in ServerNamePrefix.
     serverNamePrefixColor="#00ff00"
 
+[Notifications]
     # Boolean
-    # Notify the channel for ChatBridge when the Player Join and leaves.
+    # Whether to send a message to a dedicated channel when a player joins and when a player leaves.
     # Also, DiscordBot must be enabled to use this setting.
     notifyJoinAndLeave=true
 
@@ -70,7 +81,7 @@
     notifyJoinAndLeaveIcon="https://mc-heads.net/avatar/{uuid}"
 
     # Boolean
-    # Notify the channel for ChatBridge when the Velocity server starts and stops.
+    # Whether messages are sent to a dedicated channel when the server starts and stops.
     # Also, DiscordBot must be enabled to use this setting.
     notifyServerStartupAndShutdown=true
 
@@ -98,4 +109,4 @@
     # String
     # Config version.
     # if you do not know what this is, you should not change it.
-    configVersion="1.0.1"
+    configVersion="1.0.2"

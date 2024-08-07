@@ -89,12 +89,12 @@ public class JDAManager extends ListenerAdapter {
                                     ).queue();
                         }
                     }
-                    if (!Config.discordBotChatBridgeChannelId.isEmpty() && Config.chatBridgeNotifyServerStartupAndShutdown) {
+                    if (Config.notificationsNotifyServerStartupAndShutdown && !Config.discordBotNotifyServerStartupAndShutdownChannelId.isEmpty()) {
                         MessageEmbed embed = new EmbedBuilder()
                                 .setAuthor(LangManager.getMessage("serverHasStarted"))
                                 .setColor(0x00ff00)
                                 .build();
-                        jda.getTextChannelById(Config.discordBotChatBridgeChannelId).sendMessageEmbeds(embed).queue();
+                        jda.getTextChannelById(Config.discordBotNotifyServerStartupAndShutdownChannelId).sendMessageEmbeds(embed).queue();
                     }
                 }
             }
@@ -105,12 +105,12 @@ public class JDAManager extends ListenerAdapter {
 
     public void shutdownDiscordBot() {
         if (jda != null) {
-            if (!Config.discordBotChatBridgeChannelId.isEmpty() && Config.chatBridgeNotifyServerStartupAndShutdown) {
+            if (Config.notificationsNotifyServerStartupAndShutdown && !Config.discordBotNotifyServerStartupAndShutdownChannelId.isEmpty()) {
                 MessageEmbed embed = new EmbedBuilder()
                         .setAuthor(LangManager.getMessage("serverHasStopped"))
                         .setColor(0xff0000)
                         .build();
-                jda.getTextChannelById(Config.discordBotChatBridgeChannelId).sendMessageEmbeds(embed).complete();
+                jda.getTextChannelById(Config.discordBotNotifyServerStartupAndShutdownChannelId).sendMessageEmbeds(embed).complete();
             }
             if (!Config.discordBotPlayerListChannelId.isEmpty()) {
                 MessageEmbed embed = new EmbedBuilder()
@@ -228,18 +228,18 @@ public class JDAManager extends ListenerAdapter {
 
     public void loginMessage(Player player) {
         MessageEmbed embed = new EmbedBuilder()
-                .setAuthor(LangManager.getMessage("playerJoinedTheGame").replace("{username}", player.getUsername()), null, Config.chatBridgeNotifyJoinAndLeaveIcon.replace("{username}", player.getUsername()).replace("{uuid}", String.valueOf(player.getUniqueId())))
-                .setColor(Integer.parseInt(Config.chatBridgeNotifyJoinMessageColor.substring(1), 16))
+                .setAuthor(LangManager.getMessage("playerJoinedTheGame").replace("{username}", player.getUsername()), null, Config.notificationsNotifyJoinAndLeaveIcon.replace("{username}", player.getUsername()).replace("{uuid}", String.valueOf(player.getUniqueId())))
+                .setColor(Integer.parseInt(Config.notificationsNotifyJoinMessageColor.substring(1), 16))
                 .build();
-        jda.getTextChannelById(Config.discordBotChatBridgeChannelId).sendMessageEmbeds(embed).queue();
+        jda.getTextChannelById(Config.discordBotNotifyJoinAndLeaveChannelId).sendMessageEmbeds(embed).queue();
     }
 
     public void disconnectMessage(Player player) {
         MessageEmbed embed = new EmbedBuilder()
-                .setAuthor(LangManager.getMessage("playerLeftTheGame").replace("{username}", player.getUsername()), null, Config.chatBridgeNotifyJoinAndLeaveIcon.replace("{username}", player.getUsername()).replace("{uuid}", String.valueOf(player.getUniqueId())))
-                .setColor(Integer.parseInt(Config.chatBridgeNotifyLeaveMessageColor.substring(1), 16))
+                .setAuthor(LangManager.getMessage("playerLeftTheGame").replace("{username}", player.getUsername()), null, Config.notificationsNotifyJoinAndLeaveIcon.replace("{username}", player.getUsername()).replace("{uuid}", String.valueOf(player.getUniqueId())))
+                .setColor(Integer.parseInt(Config.notificationsNotifyLeaveMessageColor.substring(1), 16))
                 .build();
-        jda.getTextChannelById(Config.discordBotChatBridgeChannelId).sendMessageEmbeds(embed).queue();
+        jda.getTextChannelById(Config.discordBotNotifyJoinAndLeaveChannelId).sendMessageEmbeds(embed).queue();
     }
 
     public void updatePlayerListEmbedMessage() {

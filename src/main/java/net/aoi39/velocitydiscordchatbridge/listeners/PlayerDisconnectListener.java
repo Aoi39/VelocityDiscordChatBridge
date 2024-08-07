@@ -15,7 +15,7 @@ public class PlayerDisconnectListener {
 
     @Subscribe
     private void onDisconnect(DisconnectEvent event) {
-        if (Config.discordBotEnableDiscordBot && plugin.getJdaManager().getJda() != null && Config.chatBridgeNotifyJoinAndLeave && !Config.discordBotChatBridgeChannelId.isEmpty()) {
+        if (Config.discordBotEnableDiscordBot && plugin.getJdaManager().getJda() != null && Config.notificationsNotifyJoinAndLeave && !Config.discordBotNotifyJoinAndLeaveChannelId.isEmpty()) {
             plugin.getJdaManager().disconnectMessage(event.getPlayer());
         }
     }

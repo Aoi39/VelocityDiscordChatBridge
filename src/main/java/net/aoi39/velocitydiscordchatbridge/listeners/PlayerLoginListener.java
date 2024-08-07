@@ -15,7 +15,7 @@ public class PlayerLoginListener {
 
     @Subscribe
     private void onLogin(LoginEvent event) {
-        if (Config.discordBotEnableDiscordBot && plugin.getJdaManager().getJda() != null && Config.chatBridgeNotifyJoinAndLeave && !Config.discordBotChatBridgeChannelId.isEmpty()) {
+        if (Config.discordBotEnableDiscordBot && plugin.getJdaManager().getJda() != null && Config.notificationsNotifyJoinAndLeave && !Config.discordBotNotifyJoinAndLeaveChannelId.isEmpty()) {
             plugin.getJdaManager().loginMessage(event.getPlayer());
         }
     }
