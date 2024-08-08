@@ -18,23 +18,22 @@ public class PlayerChatListener {
 
     @Subscribe
     private void onPlayerChat(PlayerChatEvent event) {
-        Component message = Component.text("<" + event.getPlayer().getUsername() + "> " + event.getMessage()).color(TextColor.color(255, 255, 255));
-        if (Config.chatBridgeEnableServerNamePrefix) {
-            message = Component.text("[" + event.getPlayer().getCurrentServer().get().getServerInfo().getName() + "]").color(TextColor.fromHexString(Config.chatBridgeServerNamePrefixColor)).append(message);
-        }
-        for (RegisteredServer server : plugin.getServer().getAllServers()) {
-            if (!server.getServerInfo().getName().equals(event.getPlayer().getCurrentServer().get().getServerInfo().getName())) {
-                server.sendMessage(message);
+        if (Config.discordBotEnableDiscordBot && !Config.discordBotChatBridgeChannelId.isEmpty() && plugin.getJdaManager().getJda() != null) {
+            Component message = Component.text("<" + event.getPlayer().getUsername() + "> " + event.getMessage()).color(TextColor.color(255, 255, 255));
+            if (Config.chatBridgeEnableServerNamePrefix) {
+                message = Component.text("[" + event.getPlayer().getCurrentServer().get().getServerInfo().getName() + "]").color(TextColor.fromHexString(Config.chatBridgeServerNamePrefixColor)).append(message);
             }
-        }
-        if (Config.discordBotEnableDiscordBot && !Config.discordBotChatBridgeChannelId.isEmpty() &&plugin.getJdaManager().getJda() != null) {
+            for (RegisteredServer server : plugin.getServer().getAllServers()) {
+                if (!server.getServerInfo().getName().equals(event.getPlayer().getCurrentServer().get().getServerInfo().getName())) {
+                    server.sendMessage(message);
+                }
+            }
             String discordMessage = "<" + event.getPlayer().getUsername() + "> " + event.getMessage();
             if (Config.chatBridgeEnableServerNamePrefix) {
                 discordMessage = "[" + event.getPlayer().getCurrentServer().get().getServerInfo().getName() + "]" + discordMessage;
             }
             plugin.getJdaManager().sendChatBridgeChannel(discordMessage);
         }
-
     }
 
 }
